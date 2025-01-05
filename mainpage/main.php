@@ -10,6 +10,18 @@
     <div class="wrapper">
         <header>fi-to</header>
 
+
+ <?php
+    session_start();
+    if (!isset($_SESSION['ID'])) {
+        echo '잘못된 접근';
+        echo '<div id="register"><a href="./register.php"> 회원 가입</a>';
+        echo '<div id="login"><a href="./login.php"> 로그인</a></div>';
+        exit;
+    }
+    ?>
+
+        
         <div class="summary">
             <h2>인바디 정보</h2>
             <div class="info">
