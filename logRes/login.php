@@ -11,7 +11,13 @@
 </head>
 
 <body>
+  <?php
+    session_start();
+    session_unset();
+    session_destroy();
+    ?>
 
+  
   <h1>Fi-To</h1>
 
   <form action="./loginCheck.php" method="post" id="from" autocomplete="off">
