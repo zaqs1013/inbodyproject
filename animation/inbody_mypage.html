@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fi-to 메인페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        header {
+            padding: 16px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary {
+            padding: 16px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary h2 {
+            margin-bottom: 16px;
+            font-size: 1.25rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .summary .info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .summary .info .card {
+            background-color: #f4f4f4;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary .info .card p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .summary .info .card strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+        .edit-icon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            fill: #4CAF50;
+        }
+
+        .weather-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .weather-effect span {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: rgba(0, 0, 0, 0.1);
+            animation: rain-animation 0.8s linear infinite;
+        }
+
+        .weather-effect.snow span {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: snow-animation 3s linear infinite;
+        }
+
+        @keyframes rain-animation {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(200%);
+            }
+        }
+
+        @keyframes snow-animation {
+            from {
+                transform: translateY(-100%) translateX(0);
+            }
+            to {
+                transform: translateY(200%) translateX(30px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>fi-to</header>
+
+        <div class="summary">
+            <h2>인바디 정보</h2>
+            <div class="info">
+                <div class="card" id="heightCard">
+                    <p>키</p>
+                    <strong id="displayHeight">170cm</strong>
+                    <svg class="edit-icon" onclick="editData('height')" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
+                    </svg>
+                </div>
+                <div class="card" id="weightCard">
+                    <p>몸무게</p>
+                    <strong id="displayWeight">65kg</strong>
+                    <svg class="edit-icon" onclick="editData('weight')" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
+                    </svg>
+                </div>
+                <div class="card" id="bmiCard">
+                    <p>BMI</p>
+                    <strong id="bmiResult">22.5</strong>
+                </div>
+                <div class="card">
+                    <p>체지방률</p>
+                    <strong id="displayBodyFat">20%</strong>
+                    <svg class="edit-icon" onclick="editData('bodyFat')" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentEffect = '';
+
+        function editData(type) {
+            const value = prompt(`새로운 ${type} 값을 입력해주세요:`);
+            if (value) {
+                document.getElementById("display" + type.charAt(0).toUpperCase() + type.slice(1)).textContent =
+                    value + (type === 'height' ? 'cm' : type === 'weight' ? 'kg' : '%');
+                calculateBMI();
+            }
+        }
+
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('displayHeight').textContent.replace('cm', '')) / 100;
+            const weight = parseFloat(document.getElementById('displayWeight').textContent.replace('kg', ''));
+            const bmi = (weight / (height * height)).toFixed(1);
+            document.getElementById('bmiResult').textContent = bmi;
+            showWeatherEffect(bmi);
+        }
+
+        function showWeatherEffect(bmi) {
+            const weatherEffect = document.getElementById('weatherEffect') || createWeatherEffect();
+
+            let newEffect = bmi > 22.5 ? 'rain' : 'snow';
+            if (currentEffect === newEffect) return;
+
+            weatherEffect.classList.remove('rain', 'snow');
+            weatherEffect.classList.add(newEffect);
+            currentEffect = newEffect;
+        }
+
+        function createWeatherEffect() {
+            const weatherEffect = document.createElement('div');
+            weatherEffect.id = 'weatherEffect';
+            weatherEffect.className = 'weather-effect';
+
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('span');
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 0.5}s`;
+                weatherEffect.appendChild(element);
+            }
+
+            document.getElementById('bmiCard').appendChild(weatherEffect);
+            return weatherEffect;
+        }
+
+        window.onload = function() {
+            calculateBMI();
+        };
+    </script>
+</body>
+</html>
