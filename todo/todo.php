@@ -25,9 +25,16 @@
         <div class="calendar-container">
             <div class="calendar">
                 <div class="month">
-                    <button class="prev">&lt;</button>
-                    <div class="date">January 2025</div>
-                    <button class="next">&gt;</button>
+                    <!-- <button class="prev">&lt;</button> -->
+                    <svg class="prev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                    <div class="date">12월 2024</div>
+                    <svg class="next" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+
+                    <!-- <button class="next">&gt;</button> -->
                 </div>
 
                 <div class="weekdays">
@@ -60,6 +67,10 @@
                     </svg>
                     <input type="time" class="edit-event-time-to" />
                     <button class="save-event-btn">저장</button>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
             
