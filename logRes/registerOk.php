@@ -7,7 +7,7 @@
     <title>registerOk</title>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
     <link rel="stylesheet" href="./css/censter.css" />
-
+    <link rel="stylesheet" href="./css/erros.css" />
 
 </head>
 
@@ -29,8 +29,14 @@
 
     $phone = "010-" . $phNum1 . "-" . $phNum2;
 
-    if (empty($$name)&&empty($sex)&&empty($birth)&&empty($email)&&empty($ID)&&empty($PW) &&empty($phNum1) &&empty($phNum2)) {
-        echo "<div class='error'>오류가 발생했습니다. </div>";
+    if (empty($name) || empty($sex) || empty($birth) || empty($email) || empty($ID) || empty($PW) || empty($phNum1) || empty($phNum2)) {
+        echo "<div class='container'>";
+        echo "<div class='card error'>";
+        echo "<h1>⚠️ 입력 오류</h1>";
+        echo "<p>모든 필드를 올바르게 입력해주세요.</p>";
+        echo "<a href='./register.php'>다시 시도하기</a>";
+        echo "</div>";
+        echo "</div>";
         exit;
     }
 
@@ -38,25 +44,34 @@
     mysqli_select_db($dbcon, 'FiTo');
 
     try {
-        $query = "INSERT INTO register VALUES (NULL, '$ID', '$PW', '$name','$sex','$phone',' $email','$birth')";
+        $query = "INSERT INTO register VALUES (NULL, '$ID', '$PW', '$name','$sex','$phone','$email','$birth')";
         $result = mysqli_query($dbcon, $query);
 
         if ($result) {
-            echo "<div class='suecces'>가입 성공</div>";
-            echo "환영합니다 $name 님";
-            echo "";
+            echo "<div class='container'>";
+            echo "<div class='card'>";
+            echo "<h1>✅ 가입 성공</h1>";
+            echo "<p>환영합니다, <strong>$name</strong>님!</p>";
+            echo "<a href='./login.php'>로그인 하러가기</a>";
+            echo "</div>";
+            echo "</div>";
         }
-
 
     } catch (mysqli_sql_exception $e) {
+        echo "<div class='container'>";
+        echo "<div class='card error'>";
         if ($e->getCode() === 1062) { // 중복 오류 코드
-            echo "<div class='error'>중복된 아이디, 이메일, 전화번호가 있습니다.</div>";
+            echo "<h1>⚠️ 중복된 정보</h1>";
+            echo "<p>아이디, 이메일, 또는 전화번호가 이미 등록되어 있습니다.</p>";
         } else {
-            echo "<div class='error'>오류가 발생했습니다 010-xxxx-xxxx으로 전화를 주세요</div>";
+            echo "<h1>⚠️ 시스템 오류</h1>";
+            echo "<p>회원가입 중 문제가 발생했습니다. <br> 고객센터로 문의해주세요 (010-xxxx-xxxx).</p>";
         }
+        echo "<a href='./register.php'>다시 시도하기</a>";
+        echo "</div>";
+        echo "</div>";
     }
     mysqli_close($dbcon);
-
     ?>
 
     <div id="login"></div> <a href="./login.php">로그인 하러가기</a></div>
