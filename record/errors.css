@@ -34,7 +34,7 @@ body {
             margin-bottom: 20px;
         }
 
-        .card a, .card button {
+        .card a {
             display: block;
             text-decoration: none;
             padding: 10px 20px;
@@ -46,8 +46,6 @@ body {
             text-align: center;
         }
 
-        .error {
-            font-size: 1rem;
-            color: #e74c3c;
-            margin-bottom: 16px;
+        .card a.error {
+            background-color: #e74c3c;
         }
