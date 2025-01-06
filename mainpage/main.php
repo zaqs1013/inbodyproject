@@ -19,39 +19,90 @@
         echo '<div id="login"><a href="./login.php"> 로그인</a></div>';
         exit;
     }
+ $ID = $_SESSION['ID'] ?? null;
+
+    if (!empty($ID)) {
+        $dbcon = mysqli_connect('localhost', 'root', '');
+        mysqli_select_db($dbcon, 'FiTo');
+
+        $searchUserBodyInfoQuery = "SELECT * FROM userBodyInfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
+        $searchUserBodyInfo = mysqli_query($dbcon, $searchUserBodyInfoQuery);
+        $UserBodyInfo = mysqli_fetch_array($searchUserBodyInfo);
+
+        // 데이터 유무 확인
+        if ($UserBodyInfo) {
+            $bmi = round(($UserBodyInfo['weight'] / ($UserBodyInfo['height'] * 0.01) ** 2), 1);
+        } else {
+            $UserBodyInfo['height'] = '미측정';
+            $UserBodyInfo['weight'] = '미측정';
+            $UserBodyInfo['fatPercentage'] = '미측정';
+            $bmi = '미측정';
+
+        }
+
+    }
+    mysqli_close($dbcon);
+
     ?>
 
-        
+            <div class="wrapper">
+        <header>fi-to</header>
+
         <div class="summary">
             <h2>인바디 정보</h2>
             <div class="info">
                 <div class="card">
                     <p>키</p>
-                    <strong id="displayHeight">170cm</strong>
-                    <svg class="edit-icon" onclick="editData('height')" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
+                    <strong id="displayHeight"> <?php
+                    if ($UserBodyInfo['height'] === '미측정') {
+                        echo $UserBodyInfo['height']; // 단위 출력 없음
+                    } else {
+                        echo $UserBodyInfo['height'] . ' Cm'; // cm 단위 포함
+                    }
+                    ?></strong>
+                    <svg class="edit-icon" onclick="editData('height')" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
                     </svg>
                 </div>
                 <div class="card">
                     <p>몸무게</p>
-                    <strong id="displayWeight">65kg</strong>
-                    <svg class="edit-icon" onclick="editData('weight')" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
+                    <strong id="displayWeight"> <?php
+                    if ($UserBodyInfo['weight'] === '미측정') {
+                        echo $UserBodyInfo['weight']; // 단위 출력 없음
+                    } else {
+                        echo $UserBodyInfo['weight'] . ' Kg'; // Kg 단위 포함
+                    }
+                    ?></strong>
+                    <svg class="edit-icon" onclick="editData('weight')" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
                     </svg>
                 </div>
                 <div class="card">
                     <p>BMI</p>
-                    <strong id="bmiResult">22.5</strong>
+                    <strong id="bmiResult"><?php echo $bmi; ?></strong>
                 </div>
                 <div class="card">
                     <p>체지방률</p>
-                    <strong id="displayBodyFat">20%</strong>
-                    <svg class="edit-icon" onclick="editData('bodyFat')" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
+                    <strong id="displayBodyFat"> <?php
+                    if ($UserBodyInfo['fatPercentage'] === '미측정') {
+                        echo $UserBodyInfo['fatPercentage']; // 단위 출력 없음
+                    } else {
+                        echo $UserBodyInfo['fatPercentage'] . ' %'; // % 단위 포함
+                    }
+                    ?></strong>
+                    <svg class="edit-icon" onclick="editData('bodyFat')" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536M4 16v4h4l10-10-4-4L4 16z" />
                     </svg>
                 </div>
             </div>
         </div>
+
 
         <div class="todo-widget">
             <h3>오늘의 할 일</h3>
