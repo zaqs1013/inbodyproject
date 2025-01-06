@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fi-to 메인페이지</title>
-    <link rel="stylesheet" href="../static/css/mainPageStyle.css"/>
-
+    <link rel="stylesheet" href="../static/css/mainPageStyle.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -15,14 +15,11 @@
     if (!isset($_SESSION['ID'])) {
         echo "<body style='display: block; margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333;'>";
         echo "<div style='display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center;'>";
-
         echo "<div style='max-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);'>";
         echo "<h1 style='font-size: 2rem; color: #e74c3c; margin-bottom: 16px;'>⚠️ 잘못된 접근</h1>";
         echo "<p style='font-size: 1rem; margin-bottom: 20px;'>로그인 후 이용하실 수 있습니다.</p>";
-
         echo "<a href='../logRes/register.php' style='display: block; text-decoration: none; padding: 10px 20px; margin-bottom: 10px; background-color: #3498db; color: white; border-radius: 4px; font-size: 1rem;'>회원가입</a>";
         echo "<a href='../logRes/login.php' style='display: block; text-decoration: none; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 4px; font-size: 1rem;'>로그인</a>";
-
         echo "</div>";
         echo "</div>";
         echo "</body>";
@@ -47,13 +44,29 @@
             $UserBodyInfo['weight'] = '미측정';
             $UserBodyInfo['fatPercentage'] = '미측정';
             $bmi = '미측정';
-
         }
 
-    }
-    mysqli_close($dbcon);
-    ?>
+        // 그래프 데이터 가져오기
+        $query = "SELECT * FROM userBodyInfo WHERE userId = '$ID' ORDER BY date ASC";
+        $result = mysqli_query($dbcon, $query);
 
+        $dataPoints = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $date = $row['date'] ?? '미측정';
+            $height = $row['height'] ?? 0;
+            $weight = $row['weight'] ?? 0;
+            $bmiGraph = ($height > 0) ? round(($weight / (($height * 0.01) ** 2)), 1) : 0;
+
+            $dataPoints[] = [
+                'date' => $date,
+                'height' => $height,
+                'weight' => $weight,
+                'bmi' => $bmiGraph,
+            ];
+        }
+        mysqli_close($dbcon);
+    }
+    ?>
 
     <div class="wrapper">
         <header>fi-to</header>
@@ -113,34 +126,93 @@
             </div>
         </div>
 
-        <?php
-        $dbcon = mysqli_connect('localhost', 'root', '');
-        mysqli_select_db($dbcon, 'FiTo');
-        $todayYear = date("Y") ?? null;
-        $todayMonth = date("m") ?? null;
-        $todayDay = date("d") ?? null;
+        <!-- 그래프 추가 -->
+        <div class="graph-widget">
+            <h3>사용자 데이터 그래프</h3>
+            <canvas id="userDataChart" width="400" height="200"></canvas>
+        </div>
 
-        $searchEventQuery = "SELECT * FROM events WHERE user_id = '$ID' and year='$todayYear' and month ='$todayMonth'and day='$todayDay' ";
-        $searchEvent = mysqli_query($dbcon, $searchEventQuery);
-        mysqli_close($dbcon);
-        ?>
+        <script>
+            const dataPoints = <?php echo json_encode($dataPoints); ?>;
 
+            const labels = dataPoints.map(point => point.date || '미측정');
+            const weights = dataPoints.map(point => point.weight);
+            const heights = dataPoints.map(point => point.height);
+            const bmi = dataPoints.map(point => point.bmi);
+
+            const ctx = document.getElementById('userDataChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '몸무게 (Kg)',
+                            data: weights,
+                            borderColor: 'blue',
+                            borderWidth: 2,
+                            fill: false,
+                        },
+                        {
+                            label: '키 (Cm)',
+                            data: heights,
+                            borderColor: 'green',
+                            borderWidth: 2,
+                            fill: false,
+                        },
+                        {
+                            label: 'BMI',
+                            data: bmi,
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            fill: false,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: '날짜'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: '값'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
 
         <div class="todo-widget">
             <h3>오늘의 할 일</h3>
             <p><?php
+            $dbcon = mysqli_connect('localhost', 'root', '');
+            mysqli_select_db($dbcon, 'FiTo');
+            $todayYear = date("Y") ?? null;
+            $todayMonth = date("m") ?? null;
+            $todayDay = date("d") ?? null;
+
+            $searchEventQuery = "SELECT * FROM events WHERE user_id = '$ID' and year='$todayYear' and month ='$todayMonth'and day='$todayDay' ";
+            $searchEvent = mysqli_query($dbcon, $searchEventQuery);
             if (mysqli_num_rows($searchEvent) === 0) {
                 echo "오늘의 할 일이 없습니다.";
             } else {
-                // 결과 출력
                 while ($Event = mysqli_fetch_array($searchEvent)) {
                     echo "시작 시간: " . htmlspecialchars($Event['time_from']);
                     echo " : " . htmlspecialchars($Event['title']) . "<br>";
                 }
             }
+            mysqli_close($dbcon);
             ?></p>
-
         </div>
+      
 
         <footer>
             <a href="./main.php">
