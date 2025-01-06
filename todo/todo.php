@@ -8,6 +8,16 @@
   
 </head>
 <body>
+<?php
+    session_start();
+    if (!isset($_SESSION['ID'])) {
+        echo "잘못된 접근<br>";
+        echo '<div id="register"><a href="./register.php"> 회원 가입</a></div><br>';
+        echo '<div id="login"><a href="./login.php"> 로그인</a></div><br>';
+        exit;
+    }
+    ?>
+ 
 
     <div class="wrapper">
         <header>fi-to</header>
