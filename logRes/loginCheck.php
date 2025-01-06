@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 확인</title>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
-    <link rel="stylesheet" href="./css/erros.css">
+    <link rel="stylesheet" href="../static/css/center.css" />
+    <link rel="stylesheet" href="../static/css/erros.css" />
 </head>
 <body>
 <?php
