@@ -45,9 +45,6 @@
 
     ?>
 
-            <div class="wrapper">
-        <header>fi-to</header>
-
         <div class="summary">
             <h2>인바디 정보</h2>
             <div class="info">
