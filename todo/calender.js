@@ -19,6 +19,9 @@ async function fetchEvents() {
 }
 
 async function addEvent(eventData) {
+    eventData.day = String(eventData.day).padStart(2, '0'); // day 두 자리 변환
+    eventData.month = String(eventData.month).padStart(2, '0'); // month 두 자리 변환
+
     if (isProcessing) return;
     isProcessing = true;
 
@@ -101,7 +104,8 @@ function initCalendar() {
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
 
-    date.innerHTML = `${month + 1}월 ${year}`;
+    const paddedMonth = String(month + 1).padStart(2, '0'); // 두 자리로 변환
+    date.innerHTML = `${paddedMonth}월 ${year}`;
     let days = "";
 
     for (let x = day; x > 0; x--) {
@@ -109,7 +113,8 @@ function initCalendar() {
     }
 
     for (let i = 1; i <= lastDate; i++) {
-        const event = eventsArr.some(e => e.day == i && e.month == month + 1 && e.year == year);
+        const paddedDay = String(i).padStart(2, '0'); // 두 자리로 변환
+        const event = eventsArr.some(e => e.day === paddedDay && e.month === paddedMonth && e.year == year);
         if (i === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
             activeDay = i;
             days += `<div class="day today ${event ? "event" : ""} active">${i}</div>`;
@@ -150,7 +155,7 @@ function addDayClickListener() {
 function updateEvents(day) {
     const eventList = document.querySelector(".event-list");
     const eventsHTML = eventsArr
-        .filter(e => e.day == day && e.month == month + 1 && e.year == year)
+        .filter(e => e.day === String(day).padStart(2, '0') && e.month === String(month + 1).padStart(2, '0') && e.year == year)
         .map(e => `
             <div class="event">
                 <strong>${e.title}</strong> (${e.time_from} - ${e.time_to})
@@ -195,8 +200,8 @@ document.querySelector(".save-event-btn").addEventListener("click", async () => 
         title,
         time_from: timeFrom,
         time_to: timeTo,
-        day: activeDay,
-        month: month + 1,
+        day: String(activeDay).padStart(2, '0'), // 두 자리 변환
+        month: String(month + 1).padStart(2, '0'), // 두 자리 변환
         year
     };
 
