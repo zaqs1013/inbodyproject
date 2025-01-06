@@ -36,14 +36,19 @@ function fetchEvents($conn, $user_id) {
     echo json_encode($events);
 }
 
-// Add event for the logged-in user
+
 function addEvent($conn, $user_id) {
     $data = json_decode(file_get_contents("php://input"), true);
-    $stmt = $conn->prepare("INSERT INTO events (title, time_from, time_to, day, month, year, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+    $time_from = substr($data['time_from'], 0, 5);  
+    $time_to = substr($data['time_to'], 0, 5);  
+
+    $stmt = $conn->prepare("INSERT INTO events (title, time_from, time_to, day, month, year, user_id) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $data['title'],
-        $data['time_from'],
-        $data['time_to'],
+        $time_from,  
+        $time_to,   
         $data['day'],
         $data['month'],
         $data['year'],
@@ -52,14 +57,18 @@ function addEvent($conn, $user_id) {
     echo json_encode(['status' => 'success', 'message' => 'Event added']);
 }
 
-// Update event for the logged-in user
 function updateEvent($conn, $user_id) {
     $data = json_decode(file_get_contents("php://input"), true);
+
+    // 시간 데이터를 강제로 HH:MM 형식으로 변환
+    $time_from = substr($data['time_from'], 0, 5); 
+    $time_to = substr($data['time_to'], 0, 5);
+
     $stmt = $conn->prepare("UPDATE events SET title = ?, time_from = ?, time_to = ? WHERE id = ? AND user_id = ?");
     $stmt->execute([
         $data['title'],
-        $data['time_from'],
-        $data['time_to'],
+        $time_from, 
+        $time_to,    
         $data['id'],
         $user_id
     ]);
