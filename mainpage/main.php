@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fi-to 메인페이지</title>
+    <title>FITOMAINPAGE</title>
     <link rel="stylesheet" href="../static/css/mainPageStyle.css" />
     <link rel="stylesheet" href="../static/css/ads.css" />
+    <link rel="stylesheet" href="../static/css/mainpage.css"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../static/js/ads.js"></script>
 </head>
@@ -72,10 +73,10 @@
     ?>
 
     <div class="wrapper">
-        <header>fi-to</header>
+        <header>FITO</header>
 
         <div class="summary">
-            <h2>인바디 정보</h2>
+            <h2 id="h2">My Inbody Report</h2>
             <div class="info">
                 <div class="card">
                     <p>키</p>
@@ -131,7 +132,7 @@
 
         <!-- 그래프 추가 -->
         <div class="graph-widget">
-            <h3>사용자 데이터 그래프</h3>
+            <h2>User Data Graph</h2>
             <canvas id="userDataChart" width="400" height="200"></canvas>
         </div>
 
@@ -193,26 +194,9 @@
             });
         </script>
 
-        <!--광고영역-->
-        <div class="ad-slider">
-            <div class="ad-slider-wrapper">
-                <div class="ad-slide">
-                <img src="001.jpg" alt="Ad 1">
-                </div>
-                <div class="ad-slide">
-                <img src="002.jpg" alt="Ad 2">
-                </div>
-                <div class="ad-slide">
-                <img src="003.png" alt="Ad 3">
-                </div>
-            </div>
-            <button class="ad-slider-btn prev">◀</button>
-            <button class="ad-slider-btn next">▶</button>
-        </div>
-
 
         <div class="todo-widget">
-            <h3>오늘의 할 일</h3>
+            <h3>TODAY TODO LIST</h3>
             <p><?php
             $dbcon = mysqli_connect('localhost', 'root', '');
             mysqli_select_db($dbcon, 'FiTo');
@@ -231,42 +215,43 @@
                 }
             }
             mysqli_close($dbcon);
-            ?></p>
+            ?></p><br>
+            <!--광고영역-->
+            <div class="ad-slider">
+                <div class="ad-slider-wrapper">
+                    <div class="ad-slide">
+                    <img src="001.jpg" alt="Ad 1">
+                    </div>
+                    <div class="ad-slide">
+                    <img src="002.jpg" alt="Ad 2">
+                    </div>
+                    <div class="ad-slide">
+                    <img src="003.png" alt="Ad 3">
+                    </div>
+                </div>
+            </div>
+            <button class="ad-slider-btn prev">◀</button>
+            <button class="ad-slider-btn next">▶</button>
         </div>
-      
 
         <footer>
-            <a href="./main.php">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24"
-                    height="24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 10l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1V10z" />
-                </svg>
-                홈
-            </a>
+            <div class="home">
+                <a href="./main.php">
+                    <img src="image/home_icon.png" alt="홈 아이콘" width="28" height="28">
+                    HOME
+                </a>
+            </div>
             <a href="../record/recordBody.php">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24"
-                    height="24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 8c-3.314 0-6 2.686-6 6 0 1.657.676 3.157 1.757 4.243A5.978 5.978 0 0012 20c1.657 0 3.157-.676 4.243-1.757A5.978 5.978 0 0018 14c0-3.314-2.686-6-6-6zm0 8a2 2 0 100-4 2 2 0 000 4z" />
-                </svg>
-                인바디정보
+            <img src="image/body_icon.png" alt="홈 아이콘" width="30" height="30">
+                INBODY
             </a>
             <a href="../todo/todo.php">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24"
-                    height="24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 7V3m0 4h.01M8 12v8m0-8h.01M16 7V3m0 4h.01M16 12v8m0-8h.01" />
-                </svg>
-                투두리스트
+            <img src="image/column.png" alt="홈 아이콘" width="30" height="30">
+                TODOLIST
             </a>
             <a href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24"
-                    height="24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-                마이페이지
+                <img src="image/notice.png" alt="홈 아이콘" width="30" height="30">
+                MYPAGE
             </a>
         </footer>
     </div>
