@@ -62,11 +62,14 @@
     margin-right: 50px;
 }
 
-#crystal{
+#inbodychangbutton{
     float: right;
     margin-right: 17px;
 }
-
+#inbodyupload{
+    float: right;
+    margin-right: 17px;
+}
 .dropout{
     font-family: "Jua", serif;
     margin-left: 30px;
