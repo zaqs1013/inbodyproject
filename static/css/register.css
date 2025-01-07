@@ -1,0 +1,100 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form{
+    background-color: #fff;
+    padding: 20px 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    box-sizing: border-box;
+}
+
+form h1{
+    font-family: "Do Hyeon", serif;
+    font-size: 40px;
+    text-align: left;
+    color: #4caf50;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+form label{
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #4caf50;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#man{
+    color: #737373;
+}
+#wonman{
+    color: #737373;
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="data"]{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+form input[type="date"]{
+    width: 93%;
+    padding: 7px;
+    text-align: center;
+    border: 1px solid #ccc;
+    color: #737373;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+form input[type="tel"]{
+    width: 30%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+form div input[type="radio"] {
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+  
+form button:hover {
+    background-color: #45a049;
+}
