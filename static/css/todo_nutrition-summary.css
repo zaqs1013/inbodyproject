@@ -1,0 +1,82 @@
+.nutrition-summary {
+    margin: 16px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nutrition-summary h3 {
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-align: center;
+}
+
+.nutrition-table-wrapper {
+    overflow-x: auto; /* 테이블이 길어질 경우 스크롤 추가 */
+}
+
+.nutrition-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+.nutrition-table thead th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+.nutrition-table tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.nutrition-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.nutrition-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.nutrition-totals {
+    margin-top: 16px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nutrition-totals p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 8px;
+}
+
+.nutrition-totals ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nutrition-totals ul li {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: #555;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    font-size: 0.95rem;
+    margin: 16px 0;
+}
