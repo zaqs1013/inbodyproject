@@ -13,6 +13,8 @@
 
 <body>
 <?php
+include '../static/dbconfig.php';
+
 session_start();
 
 if (!isset($_SESSION['ID'])) {
@@ -41,8 +43,8 @@ $fatmass = round(($weight * $fatpercentage * 0.01), 1);
 $leanbodymass = round($weight * (1 - $fatpercentage * 0.01), 1);
 
 //디비 열기
-$dbcon = mysqli_connect('localhost', 'root', '');
-mysqli_select_db($dbcon, 'FiTo');
+$dbcon = mysqli_connect($host, $user, $password);
+mysqli_select_db($dbcon, $database);
 
 //성별찾기
 $searchUserSexQuery = "SELECT sex FROM register WHERE userId = '$ID'";

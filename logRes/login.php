@@ -7,7 +7,6 @@
   <title>Fi-To</title>
   <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
   <link rel="stylesheet" href="../static/css/center.css" />
-
 </head>
 
 <body>
@@ -15,9 +14,8 @@
     session_start();
     session_unset();
     session_destroy();
-    ?>
+  ?>
 
-  
   <h1>Fi-To</h1>
 
   <form action="./loginCheck.php" method="post" id="from" autocomplete="off">
@@ -30,14 +28,11 @@
       <label for="PW">비밀번호</label>
       <input type="password" id="PW" name="PW" value="" required title="비밀번호를 입력해주세요" />
     </div>
-
-    <button id="loginbutton" type="submit">로그인</button>
-
+    <div id="button-container">
+      <button id="loginbutton" type="submit">로그인</button>
+      <a id="regbtn" href="./register.php" id="register-link">회원 가입</a>
+    </div>
   </form>
-
-  <div id="register">
-    <a href="./register.php"> <button>회원 가입</button></a>
-  </div>
 </body>
 
 </html>

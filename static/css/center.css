@@ -5,3 +5,17 @@ body {
     justify-content: center;
     min-height: 100vh;
 }
+
+#regbtn{
+  border-radius: var(--border-radius) ;
+  display: inline-block ;
+  font-size: medium ;
+  font-weight: bold ;
+  line-height: var(--line-height);
+  margin-left: 3rem;
+  padding: 1rem 1.5rem ;
+  background-color: var(--color-link) ;
+  border: 2px solid var(--color-link) ;
+  color: var(--color-bg) ;
+  text-decoration-line: none;
+}

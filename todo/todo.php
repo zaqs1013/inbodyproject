@@ -79,7 +79,7 @@
             </svg>
             인바디정보
         </a>
-        <a href="../todo/todo">
+        <a href="todo.php">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m0 4h.01M8 12v8m0-8h.01M16 7V3m0 4h.01M16 12v8m0-8h.01" />
             </svg>
@@ -92,8 +92,8 @@
             마이페이지
         </a>
     </footer>
-    <script src="calender.js"></script>
-    <script src="edit.js"></script>
+    <script src="../static/js/calender.js"></script>
+    <script src="../static/js/edit.js"></script>
     
 </body>
 

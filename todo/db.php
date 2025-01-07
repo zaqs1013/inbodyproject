@@ -1,8 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root"; // 기본 사용자
-$password = ""; // 기본 비밀번호
-$dbname = "fito";
+include '../static/dbconfig.php';
+$servername = $host;
+$username = $user; // 기본 사용자
+$password = $password; // 기본 비밀번호
+$dbname = $database;
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
