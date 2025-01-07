@@ -13,9 +13,11 @@
         echo "</body>";
         exit;
     }
-
+ 
     $ID = $_SESSION['ID'] ?? null;
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -34,34 +36,44 @@
             <div class="maintext">
                 <text id="headtext">마이페이지</text>
             </div>
-            
         </head>
         <main>
             <div class="mainscren">
                 <section >
                     <div class="userdata">
-                        <h2 id="report">FITO 회원정보</h2><br>
+                        <h2 id="report">FITO 회원정보</h2>
                         <div class="userprofile">
                             <!-- 기본 프로필 이미지 -->
                             <img id="profileImage" src="./img/profile.png" width="150px" height="150px" alt="프로필 이미지">
                             <!-- 변경 버튼 -->
-                            <input type="file" name="image" id="input" accept="image/*" style="display: none;">
-                            <button id="changbutton" type="button"><img src="./img/camera.png" width="35px" height="35px"></button>
+                                <input type="file" name="image" id="input" accept="image/*" style="display: none;">
+                                <button id="changbutton" type="button"><img src="./img/camera.png" width="35px" height="35px"></button>
                         </div><br>
-                        <text id="user"> 아이디 : 홍길동 </text>
-                        <!-- loginout Button -->
-                        <button id="outbutton">
-                            <a href="../logRes/login.php">login out</a>
-                        </button><br><br>
-                        <text id="user">나이 : 27세 </text><br><br>
-                        <text id="user">성별 : 남 </text><br><br>
-                        <text id="user">키 : 170cm </text><br><br>
-                        <text id="user">몸무게 : 75kg</text><br><br>
-                        <text id="user">Email :  test@gamil.com</text><br><br>
-                        <text id="user">전화번호 : 010-5632-0100</text><br><br>
+                        <?php
+                            $dbconn = mysqli_connect("localhost","root","");
+                            mysqli_select_db($dbconn, "fito");
+
+                            $sql = "SELECT userid, name, sex, phone, email FROM register";
+                            $result = mysqli_query($dbconn, $sql);
+
+                            if(!$result){
+                                die("쿼리 실행 실패 : ". mysql_error());
+                            }
+
+                            $row = mysqli_fetch_assoc($result);
+                            mysqli_close($dbconn);
+                        ?>
+                        <text id="user">아이디: <input type="text" value="<?php echo $row['userid']; ?>" readonly></text><br><br>
+                        <text id="user">이름: <input type="text" value="<?php echo $row['name']; ?>" readonly></text><br><br>
+                        <text id="user">성별: <input type="text" value="<?php echo $row['sex']; ?>" readonly></text><br><br>
+                        <text id="user">전화번호: <input type="text" value="<?php echo $row['phone']; ?>" readonly></text><br><br>
+                        <text id="user">Email: <input type="text" value="<?php echo $row['email']; ?>" readonly></text><br><br>
                         <div class="dropout">
                             <a href="#"><text>FTO 시스템 회원탈퇴</text></a>
-                            <button id="inbodyupload"><a href="modification.php">회원정보 수정</a></button><br><br>
+                            <button id="inbodychangbutton">회원정보 수정</button><br><br>
+                        </div>
+                        <div class="inbody">
+                            <button id="inbodyupload"><a href='../record/recordBody.php'>인바디 업데이트</button><br><br>
                         </div>
                     </div>
                 </section>
@@ -70,7 +82,7 @@
         </main>
         <footer>
             <footer>
-                <a href="../mainpage/main.php">
+                <a href="./main.php">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1V10z" />
                     </svg>
@@ -100,6 +112,7 @@
     <script>
         const input = document.getElementById('input');
         const changbutton = document.getElementById('changbutton');
+        const inbodychangbutton = document.getElementById('inbodychangbutton');
         
         changbutton.addEventListener('click', () => {
             input.click();
@@ -123,6 +136,9 @@
             }
         });
 
+        inbodychangbutton.addEventListener('click', () => {
+            alert("수정이 완료되었습니다");
+        });
     </script>
 </body>
 </html>
