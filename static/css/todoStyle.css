@@ -6,18 +6,27 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
-.wrapper {
+.container {
     width: 100%;
     max-width: 480px;
-    height: 100%;
-    background-color: white;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+}
+
+.wrapper {
+    flex: 1;
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
 }
 
 header {
@@ -26,13 +35,12 @@ header {
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ffff;
+    color: #fff;
+    flex-shrink: 0; /* 헤더 고정 */
     border-bottom: 1px solid #ddd;
 }
 
 .calendar-container {
-    flex: 1;
-    overflow-y: auto;
     padding: 16px;
 }
 
@@ -56,7 +64,6 @@ header {
     color: #333;
 }
 
- 
 .calendar .weekdays,
 .calendar .days {
     display: grid;
@@ -69,12 +76,12 @@ header {
     font-size: 0.875rem;
     color: #666;
 }
+
 .calendar .days .day {
     text-align: center;
-    vertical-align: middle; /* 세로 가운데 정렬 */
-    display: flex; /* 플렉스 컨테이너 사용 */
-    justify-content: center; /* 가로 가운데 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 8px;
     border-radius: 4px;
     cursor: pointer;
@@ -87,79 +94,22 @@ header {
     color: #fff;
 }
 
-.calendar .days .day.event {
-    background-color: #f9f9f9; /* 일정이 있는 날짜의 배경색 */
-    border: 1px solid #4CAF50; /* 일정이 있는 날짜 강조 */
-    color: #333;
-}
-
-.calendar .days .day.event.active {
-    background-color: #4CAF50; /* 선택된 날짜 강조 */
-    color: #fff;
-}
-
 .calendar .days .day:hover {
     background-color: #e0e0e0;
 }
 
-/* 이벤트 버튼 크기와 위치 정렬 */
+.event-container {
+    padding: 16px;
+}
+
 .event-container .event {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px; /* 일정 패딩 */
+    padding: 10px;
     background-color: #f4f4f4;
     border-radius: 8px;
     margin-bottom: 8px;
-}
-
-/* 일정 텍스트 정렬 */
-.event-container .event .event-details {
-    flex: 1; /* 버튼 간격 조정 */
-
-}
-
-/* 일정 버튼 스타일 */
-.edit-event-btn,
-.delete-event-btn {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.875rem;
-    margin-left: 5px;
-}
-
-.add-event-wrapper {
-    display: none;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.add-event-wrapper.active {
-    display: flex;
-}
-
-.add-event-wrapper input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.add-event-wrapper button {
-    padding: 8px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 footer {
@@ -169,7 +119,7 @@ footer {
     background-color: #fff;
     border-top: 1px solid #ddd;
     padding: 12px 0;
-    position: fixed;
+    position: sticky; /* 푸터 고정 */
     bottom: 0;
     width: 100%;
     max-width: 480px;
@@ -188,23 +138,17 @@ footer a {
 footer a svg {
     margin-bottom: 4px;
 }
- 
 
 .edit-event-wrapper {
-    display: none;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none; /* 기본 상태에서는 숨김 */
+    flex-direction: column; /* 입력 필드와 버튼을 세로 정렬 */
+    gap: 8px; /* 요소 간 간격 */
+    padding: 16px; /* 내부 여백 */
+    background-color: #fff; /* 배경색 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
 }
-
-.down-svg {
-    display: block; /* SVG 요소를 블록으로 처리 */
-    margin: 0 auto; /* 수평 가운데 정렬 */
-}
-
 
 .edit-event-wrapper.active {
     display: flex;
@@ -226,6 +170,20 @@ footer a svg {
     cursor: pointer;
 }
  
+
+/* 일정 버튼 스타일 */
+.edit-event-btn,
+.delete-event-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-left: 5px;
+}
+
  
 .event-details{ /*일정표시부분*/
     flex: 1; 
@@ -248,3 +206,7 @@ footer a svg {
 }
 
 
+.day.selected {
+    background-color: #4CAF50 !important;
+    color:#FFFFFF !important;
+}
