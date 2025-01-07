@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fi-to 메인페이지</title>
     <link rel="stylesheet" href="../static/css/mainPageStyle.css" />
+    <link rel="stylesheet" href="../static/css/ads.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../static/js/ads.js"></script>
 </head>
 
 <body>
     <?php
+    include '../static/dbconfig.php';
     session_start();
     if (!isset($_SESSION['ID'])) {
         echo "<body style='display: block; margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333;'>";
@@ -29,8 +32,8 @@
     $ID = $_SESSION['ID'] ?? null;
 
     if (!empty($ID)) {
-        $dbcon = mysqli_connect('localhost', 'root', '');
-        mysqli_select_db($dbcon, 'FiTo');
+        $dbcon = mysqli_connect($host, $user, $password);
+        mysqli_select_db($dbcon, $database);
 
         $searchUserBodyInfoQuery = "SELECT * FROM userBodyInfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
         $searchUserBodyInfo = mysqli_query($dbcon, $searchUserBodyInfoQuery);
@@ -189,6 +192,24 @@
                 }
             });
         </script>
+
+        <!--광고영역-->
+        <div class="ad-slider">
+            <div class="ad-slider-wrapper">
+                <div class="ad-slide">
+                <img src="001.jpg" alt="Ad 1">
+                </div>
+                <div class="ad-slide">
+                <img src="002.jpg" alt="Ad 2">
+                </div>
+                <div class="ad-slide">
+                <img src="003.png" alt="Ad 3">
+                </div>
+            </div>
+            <button class="ad-slider-btn prev">◀</button>
+            <button class="ad-slider-btn next">▶</button>
+        </div>
+
 
         <div class="todo-widget">
             <h3>오늘의 할 일</h3>

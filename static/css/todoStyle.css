@@ -21,11 +21,12 @@ body {
 }
 
 header {
+    background-color: #4CAF50;
     padding: 16px;
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: #ffff;
     border-bottom: 1px solid #ddd;
 }
 

@@ -14,6 +14,8 @@
 <body>
 
     <?php
+    include '../static/dbconfig.php';
+
     $name = $_POST['name'] ?? null;
 
     $sex = $_POST['sex'] ?? null;
@@ -40,8 +42,8 @@
         exit;
     }
 
-    $dbcon = mysqli_connect('localhost', 'root', '');
-    mysqli_select_db($dbcon, 'FiTo');
+    $dbcon = mysqli_connect($host, $user, $password);
+    mysqli_select_db($dbcon, $database);
 
     try {
         $query = "INSERT INTO register VALUES (NULL, '$ID', '$PW', '$name','$sex','$phone','$email','$birth')";

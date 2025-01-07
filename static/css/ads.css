@@ -1,0 +1,43 @@
+.ad-slider {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.ad-slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.ad-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.ad-slide img {
+  width: 100%;
+  display: block;
+}
+
+.ad-slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.ad-slider-btn.prev {
+  left: 10px;
+}
+
+.ad-slider-btn.next {
+  right: 10px;
+}

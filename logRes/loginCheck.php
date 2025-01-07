@@ -10,11 +10,13 @@
 </head>
 <body>
 <?php
+    include '../static/dbconfig.php';//디비 접속정보 파일
+
     $ID = $_POST['ID'];
     $PW = $_POST['PW'];
 
-    $dbcon = mysqli_connect('localhost', 'root', '');
-    mysqli_select_db($dbcon, 'FiTo');
+    $dbcon = mysqli_connect($host, $user, $password);
+    mysqli_select_db($dbcon, $database);
 
     $query = "SELECT * FROM register WHERE userId = '$ID' AND password = '$PW'";
     $result = mysqli_query($dbcon, $query);
