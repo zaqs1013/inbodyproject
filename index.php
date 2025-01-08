@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php 
-        echo "<meta http-equiv='refresh' content='2; url=./logres/login.php' />";
+        echo "<meta http-equiv='refresh' content='0; url=./logres/login.php' />";
 ?>    
 
 </body>
