@@ -1,4 +1,6 @@
 <?php
+include '../static/dbconfig.php';
+
 session_start();
 if (!isset($_SESSION['ID'])) {
     echo "<body style='display: block; margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333;'>";
@@ -16,10 +18,11 @@ if (!isset($_SESSION['ID'])) {
 
 $ID = $_SESSION['ID'] ?? null;
 
-$dbcon = mysqli_connect('localhost', 'root', '', 'FiTo');
+
+$dbcon = mysqli_connect($host, $user, $password, $database);
 
 $searchRegisterQuery = "SELECT * FROM register WHERE userId = '$ID'";
-$searchUserBodyInfoQuery = "SELECT * FROM userBodyInfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
+$searchUserBodyInfoQuery = "SELECT * FROM userbodyinfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
 
 $searchUserBodyInfo = mysqli_query($dbcon, $searchUserBodyInfoQuery);
 $searchRegister = mysqli_query($dbcon, $searchRegisterQuery);

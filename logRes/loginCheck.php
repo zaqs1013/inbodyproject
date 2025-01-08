@@ -15,8 +15,7 @@
     $ID = $_POST['ID'];
     $PW = $_POST['PW'];
 
-    $dbcon = mysqli_connect($host, $user, $password);
-    mysqli_select_db($dbcon, $database);
+    $dbcon = mysqli_connect($host, $user, $password, $database);
 
     $query = "SELECT * FROM register WHERE userId = '$ID' AND password = '$PW'";
     $result = mysqli_query($dbcon, $query);

@@ -1,19 +1,6 @@
-<!-- <?php
-$host = 'localhost';       // 데이터베이스 호스트
-$user = 'gongryak';            // 사용자명
-$password = 'trainingfito4!';            // 비밀번호
-$database = 'gongryak';        // 사용할 데이터베이스
-?> 
-
-닷홈버전
--->
-
-
-
-
 <?php
 $host = 'localhost';       // 데이터베이스 호스트
-$user = 'root';            // 사용자명
-$password = '';            // 비밀번호
-$database = 'FiTo';        // 사용할 데이터베이스
+$user = 'gongryak';        // 사용자명
+$password = 'trainingfito4!'; // 비밀번호
+$database = 'gongryak';    // 사용할 데이터베이스
 ?>

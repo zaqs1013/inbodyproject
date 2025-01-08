@@ -16,12 +16,12 @@
     session_start();
     $ID = $_SESSION['ID'] ?? null;
 
-
+    include '../static/dbconfig.php';
     // 데이터베이스 연결
-    $dbcon = mysqli_connect("localhost", "root", "", "fito");
+    $dbcon = mysqli_connect($host, $user, $password, $database);
 
     // 최신 userBodyInfo 가져오기
-    $searchUserBodyInfoQuery = "SELECT * FROM userBodyInfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
+    $searchUserBodyInfoQuery = "SELECT * FROM userbodyinfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
     $searchUserBodyInfo = mysqli_query($dbcon, $searchUserBodyInfoQuery);
     $UserBodyInfo = mysqli_fetch_array($searchUserBodyInfo);
 
