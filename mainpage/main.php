@@ -33,10 +33,9 @@
     $ID = $_SESSION['ID'] ?? null;
 
     if (!empty($ID)) {
-        $dbcon = mysqli_connect($host, $user, $password);
-        mysqli_select_db($dbcon, $database);
+        $dbcon = mysqli_connect($host, $user, $password, $database);
 
-        $searchUserBodyInfoQuery = "SELECT * FROM userBodyInfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
+        $searchUserBodyInfoQuery = "SELECT * FROM userbodyinfo WHERE userId = '$ID' ORDER BY date DESC LIMIT 1";
         $searchUserBodyInfo = mysqli_query($dbcon, $searchUserBodyInfoQuery);
         $UserBodyInfo = mysqli_fetch_array($searchUserBodyInfo);
 
@@ -51,7 +50,7 @@
         }
 
         // 그래프 데이터 가져오기
-        $query = "SELECT * FROM userBodyInfo WHERE userId = '$ID' ORDER BY date ASC";
+        $query = "SELECT * FROM userbodyinfo WHERE userId = '$ID' ORDER BY date ASC";
         $result = mysqli_query($dbcon, $query);
 
         $dataPoints = [];
@@ -198,8 +197,7 @@
         <div class="todo-widget">
             <h3>TODAY TODO LIST</h3>
             <p><?php
-            $dbcon = mysqli_connect('localhost', 'root', '');
-            mysqli_select_db($dbcon, 'FiTo');
+            $dbcon = mysqli_connect($host, $user, $password, $database);
             $todayYear = date("Y") ?? null;
             $todayMonth = date("m") ?? null;
             $todayDay = date("d") ?? null;
