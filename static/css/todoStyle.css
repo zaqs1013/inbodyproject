@@ -4,12 +4,37 @@ body {
     background-color: #f9f9f9;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
+    align-items: flex-start; /* 상단 정렬 */
+    height: 100vh; 
+    overflow: hidden; /* 전체 스크롤 방지 */
 }
 
-.container {
+.wrapper {
+    width: 100%;
+    max-width: 480px;
+    height: 100vh; /* 화면 전체 높이를 사용 */
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-y: scroll; //세로 스크롤 활성화
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 16px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffff;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.container{
+
+    overflow-y: auto; /* 세로 스크롤 활성화 */
     width: 100%;
     max-width: 480px;
     height: 100vh;
@@ -20,26 +45,9 @@ body {
     border-radius: 8px;
     overflow: hidden;
 }
-
-.wrapper {
-    flex: 1;
-    overflow-y: auto; /* 세로 스크롤 활성화 */
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
+.nutrition-summary, .event-container {
+    padding-bottom: 100px; /* 각 영역 사이에 간격 추가 */
 }
-
-header {
-    background-color: #4CAF50;
-    padding: 16px;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #fff;
-    flex-shrink: 0; /* 헤더 고정 */
-    border-bottom: 1px solid #ddd;
-}
-
 .calendar-container {
     padding: 16px;
 }
@@ -79,6 +87,7 @@ header {
 
 .calendar .days .day {
     text-align: center;
+    vertical-align: middle;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,14 +103,22 @@ header {
     color: #fff;
 }
 
+.calendar .days .day.event {
+    background-color: #f9f9f9;
+    border: 1px solid #4CAF50;
+    color: #333;
+}
+
+.calendar .days .day.event.active {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
 .calendar .days .day:hover {
     background-color: #e0e0e0;
 }
 
-.event-container {
-    padding: 16px;
-}
-
+/* 이벤트 버튼 크기와 위치 정렬 */
 .event-container .event {
     display: flex;
     justify-content: space-between;
@@ -112,17 +129,65 @@ header {
     margin-bottom: 8px;
 }
 
-footer {
+/* 일정 텍스트 정렬 */
+.event-container .event .event-details {
+    flex: 1;
+}
+
+.edit-event-btn,
+.delete-event-btn {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-left: 5px;
+}
+
+.add-event-wrapper {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-event-wrapper.active {
     display: flex;
+}
+
+.add-event-wrapper input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.add-event-wrapper button {
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+footer {
+display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: #fff;
     border-top: 1px solid #ddd;
     padding: 12px 0;
-    position: sticky; /* 푸터 고정 */
+    position: fixed;
     bottom: 0;
     width: 100%;
     max-width: 480px;
+    z-index: 10; /* footer가 다른 콘텐츠 위에 표시되도록 */
 }
 
 footer a {
@@ -140,14 +205,18 @@ footer a svg {
 }
 
 .edit-event-wrapper {
-    display: none; /* 기본 상태에서는 숨김 */
-    flex-direction: column; /* 입력 필드와 버튼을 세로 정렬 */
-    gap: 8px; /* 요소 간 간격 */
-    padding: 16px; /* 내부 여백 */
-    background-color: #fff; /* 배경색 */
-    border-radius: 8px; /* 모서리 둥글게 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.down-svg {
+    display: block;
+    margin: 0 auto;
 }
 
 .edit-event-wrapper.active {
@@ -169,32 +238,16 @@ footer a svg {
     border-radius: 4px;
     cursor: pointer;
 }
- 
 
-/* 일정 버튼 스타일 */
-.edit-event-btn,
-.delete-event-btn {
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.875rem;
-    margin-left: 5px;
-}
-
- 
-.event-details{ /*일정표시부분*/
-    flex: 1; 
+.event-details {
+    flex: 1;
     padding: 5px 13px;
 }
- 
 
-.event {  
-    display: flex; /* 자식 요소들을 가로로 나열 */
-    justify-content: space-between; /*양쪽 정렬*/
-    align-items: center; /* 세로 축 정렬 */
+.event {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 8px;
     background-color: #f4f4f4;
     border-radius: 8px;
@@ -202,11 +255,5 @@ footer a svg {
 
 .event div {
     display: flex;
-    gap: 5px; /* 수정 버튼과 삭제 버튼 간격 조정 */
-}
-
-
-.day.selected {
-    background-color: #4CAF50 !important;
-    color:#FFFFFF !important;
+    gap: 5px;
 }
