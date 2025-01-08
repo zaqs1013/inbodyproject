@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>인바디 정보</title>
+    <title>애니메이션 변경 테스트</title>
     <link rel="stylesheet" href="ranking.css">
     <script type="module" src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js"></script>
 </head>
@@ -365,16 +365,16 @@
                 const rank = <?php echo json_encode($userRank); ?>;
                 console.log('Rank:', rank);
 
-                if (rank < 10) {
+                if (rank < 20) {
                     loadAnimation('firecracker');
-                } else if (rank < 40) {
-                    loadAnimation('fire');
-                } else if (rank < 60) {
-                    loadAnimation('sun');
-                } else if (rank < 80) {
-                    loadAnimation('rain');
-                } else {
+                } else if (rank < 50) {
                     loadAnimation('snow');
+                } else if (rank < 60) {
+                    loadAnimation('rain');
+                } else if (rank < 70) {
+                    loadAnimation('firecracker');
+                } else {
+                    loadAnimation('sun');
                 }
             } catch (error) {
                 console.error('Rank fetch error:', error);
