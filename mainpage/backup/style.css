@@ -1,51 +1,32 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    color: #333;
-    background-color: #F4F4F4;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .wrapper {
     width: 100%;
     max-width: 480px;
+    height: 100%;
     background-color: white;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    margin: 0 auto;
+    overflow: hidden;
 }
 
-/* 헤더 스타일 */
 header {
-    background-color: #68b468;
-    color: white;
-    padding: 20px 0;
+    padding: 16px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    border-bottom: 1px solid #ddd;
-}
-
-
-header h2 {
-    color: #a1d9a9;
-}
-
-
-/* 카드 컴포넌트 */
-.card {
-    background-color: #E6F6DD;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-#h2 {
-    color: #639E6C;
-    margin-top: 5px; /* 아래로 20px 여백 추가 */
+    color: #ffffff;
+    background-color: #4CAF50;
 }
 
 .summary {
@@ -55,7 +36,7 @@ header h2 {
 
 .summary h2 {
     margin-bottom: 16px;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: #333;
     text-align: center;
 }
@@ -67,24 +48,24 @@ header h2 {
 }
 
 .summary .info .card {
-    background-color: #E6F6DD;
+    background-color: #f4f4f4;
     padding: 16px;
-    border-radius: 10px;
+    border-radius: 8px;
     text-align: center;
     position: relative;
 }
 
 .summary .info .card p {
     margin: 0;
-    font-size: 1rem;
-    color: #639E6C;
+    font-size: 0.875rem;
+    color: #666;
 }
 
 .summary .info .card strong {
     display: block;
     margin-top: 8px;
     font-size: 1.25rem;
-    color: #639E6C;
+    color: #333;
 }
 
 .edit-icon {
@@ -96,26 +77,19 @@ header h2 {
     cursor: pointer;
     fill: #4CAF50;
 }
-
-.graph-widget h2 {
-    text-align: center; 
-    color: #639E6C; 
-}
-
 .todo-widget {
     padding: 16px;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 75px;
 }
 .todo-widget h3 {
     margin-bottom: 8px;
     font-size: 1.25rem;
-    color: #639E6C;
+    color: #333;
 }
 .todo-widget p {
     margin: 0;
     font-size: 1rem;
-    color: #639E6C;
+    color: #666;
 }
 .todo-widget .empty {
     color: #aaa;
