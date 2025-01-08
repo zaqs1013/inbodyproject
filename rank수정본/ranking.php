@@ -14,7 +14,7 @@
     // PHP에서 rank 값을 가져오기
     require 'rankAndScore.php';
     ?>
-    
+
     <canvas id="bg-canvas"></canvas>
 
     <script type="module">
@@ -301,7 +301,7 @@
                 stop: () => cancelAnimationFrame(currentAnimationFrameId),
             },
         };
-       
+
         // 애니메이션 로드 함수
         function loadAnimation(type) {
             if (currentAnimation && animations[currentAnimation]) {
@@ -317,16 +317,14 @@
                 const rank = <?php echo json_encode($userRank); ?>;
                 console.log('Rank:', rank);
 
-                if (rank < 20) {
+                if (rank < 10) {
                     loadAnimation('fire');
-                } else if (rank < 50) {
-                    loadAnimation('snow');
+                } else if (rank < 40) {
+                    loadAnimation('sun');
                 } else if (rank < 60) {
                     loadAnimation('rain');
-                } else if (rank < 70) {
-                    loadAnimation('firecracker');
                 } else {
-                    loadAnimation('sun');
+                    loadAnimation('snow');
                 }
             } catch (error) {
                 console.error('Rank fetch error:', error);
