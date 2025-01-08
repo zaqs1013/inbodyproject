@@ -45,11 +45,10 @@ header {
     border-radius: 8px;
     overflow: hidden;
 }
-.calendar-container, .nutrition-summary, .event-container {
+.nutrition-summary, .event-container {
     padding-bottom: 100px; /* 각 영역 사이에 간격 추가 */
 }
 .calendar-container {
-    flex-grow: 1; /* 나머지 공간 차지 */
     padding: 16px;
 }
 
