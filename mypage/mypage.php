@@ -36,27 +36,27 @@ mysqli_close($dbcon);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Oswald font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <title>FTO_project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <!-- Do Hyeon font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <title>FITO_MYPAGE</title>
     <link rel="stylesheet" href="./style/mypage.css">
+    <link rel="stylesheet" href="../static/css/mypagestyle.css"/>
 </head>
 
 <body>
     <div class="wrapper">
-
-        <head>
-            <div class="maintext">
-                <text id="headtext">마이페이지</text>
-            </div>
-
-        </head>
+        <header>MYPAGE</header>
         <main>
             <div class="mainscren">
                 <section>
                     <div class="userdata">
-                        <h2 id="report">FITO 회원정보</h2><br>
+                        <h2>회원정보</h2><br>
                         <div class="userprofile">
                             <!-- 기본 프로필 이미지 -->
                             <img id="profileImage" src="./img/profile.png" width="150px" height="150px" alt="프로필 이미지">
@@ -85,34 +85,28 @@ mysqli_close($dbcon);
                         <text id="user">몸무게 : <?php echo $UserBodyInfo['weight'] ?></text><br><br>
                         <text id="user">Email : <?php echo $register['email'] ?></text><br><br>
                         <text id="user">전화번호 : <?php echo $register['phone'] ?></text><br><br>
-                        <div class="dropout">
-                            <a href="#"><text>FTO 시스템 회원탈퇴</text></a>
-                            <button id="inbodyupload"><a href="modification.php">회원정보 수정</a></button><br><br>
-                        </div>
-                        <div class="inbody">
-                            <button id="inbodyupload"><a href='../record/recordBody.php'>인바디 업데이트</button><br><br>
-                        </div>
                     </div>
+                    <div class="dropout">
+                            <button id="inbodyupload1"><a href="modification.php">회원정보 수정</a></button>
+                            <button id="inbodyupload2"><a href='../record/recordBody.php'>인바디 업데이트</button>
                 </section>
             </div>
             <br><br>
         </main>
         <footer>
-            <div class="home">
-                <a href="../mainpage/main.php">
-                    <img src="../mainpage/image/home_icon.png" alt="홈 아이콘" width="28" height="28">
-                    홈
-                </a>
-            </div>
+            <a href="../mainpage/main.php">
+                <img src="../mainpage/image/home_icon.png" alt="홈 아이콘" width="28" height="28">
+                홈
+            </a>
             <a href="../rank/ranking.php">
-            <img src="../mainpage/image/notice.png" alt="랭킹 아이콘" width="30" height="30">
+                <img src="../mainpage/image/notice.png" alt="랭킹 아이콘" width="30" height="30">
                 랭킹
             </a>
             <a href="../todo/todo.php">
-            <img src="../mainpage/image/column.png" alt="일정관리 아이콘" width="30" height="30">
+                <img src="../mainpage/image/column.png" alt="일정관리 아이콘" width="30" height="30">
                 일정관리
             </a>
-            <a href="./mypage.php">
+            <a href="../mypage/mypage.php">
                 <img src="../mainpage/image/body_icon.png" alt="마이페이지 아이콘" width="30" height="30">
                 마이페이지
             </a>
