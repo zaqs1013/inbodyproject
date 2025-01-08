@@ -241,7 +241,7 @@
                     HOME
                 </a>
             </div>
-            <a href="../record/recordBody.php">
+            <a href="../rank/ranking.php">
             <img src="image/body_icon.png" alt="홈 아이콘" width="30" height="30">
                 INBODY
             </a>

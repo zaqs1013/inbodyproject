@@ -4,21 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>랭킹</title>
 
-    <style>
-    #rankBanner {
-        text-align: center;
-        margin-bottom: 20px;
-        background-color: #ffffff; /* 하얀색 배경 */
-        color: #333333; /* 텍스트 색상 */
-        padding: 20px; /* 내부 여백 */
-        border-radius: 10px; /* 모서리 둥글게 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-        width: 60%; /* 콘텐츠 폭 */
-        margin: 20px auto; /* 수평 중앙 정렬 */
-    }
-</style>
 
 </head>
 
