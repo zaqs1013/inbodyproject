@@ -1,0 +1,62 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding : 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    background-color: #ffffff;
+}
+
+form{
+    width: 500px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-family: "Oswald", serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #68b168;
+}
+
+#height label,
+#weight label,
+#fatpercentage label {
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-left: 95px;
+    display: block;
+    color: #68b168;
+    text-align: left;
+}
+
+#height input,
+#weight input,
+#fatpercentage input{
+    width: 65%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button#submit {
+    width: 65%;
+    height: 50px;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #68b168;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>recoredBod</title>
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
-  <link rel="stylesheet" href="../static/css/center.css" />
-
+    <title>recored_Body</title>
+    <!-- Girassol font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Girassol&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/center.css" />
+    <link rel="stylesheet" href="../static/css/inbodydata.css"/>
 </head>
 
 <?php
@@ -32,7 +35,7 @@ if (!isset($_SESSION['ID'])) {
 
 
 <form action="./recordBodyOk.php" method="post" id="from" autocomplete="off">
-    <h1>정보 입력</h1>
+    <h1>WHAT IS YOUR INBODY DATA?</h1><br>
     <div id="height">
       <label for="ID">키</label>
       <input type="number" id="height" name="height" value=""  step="0.1" required title="신장을 입력해 주세요." />
