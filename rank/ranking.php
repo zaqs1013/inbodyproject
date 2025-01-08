@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>인바디 정보</title>
+    <title>랭킹</title>
     <link rel="stylesheet" href="ranking.css">
     <script type="module" src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js"></script>
 </head>
@@ -234,122 +234,74 @@
                 },
                 stop: () => cancelAnimationFrame(currentAnimationFrameId),
             },
-            firecracker: { //폭죽
-    start: () => {
-        initScene();
-        camera.position.z = 100;
+            firecracker: { // 폭죽
+                start: () => {
+                    initScene();
+                    camera.position.z = 50;
 
-        const explosionCount = 8;
-        const particleCountPerExplosion = 140;
-        const explosionRadius = 100;
+                    const particleCount = 500;
+                    const particlesGeometry = new THREE.BufferGeometry();
+                    const positions = [];
+                    const velocities = [];
+                    const colors = [];
 
-        const particlesGeometry = new THREE.BufferGeometry();
-        const positions = [];
-        const velocities = [];
-        const colors = [];
-        const sizes = [];
+                    for (let i = 0; i < particleCount; i++) {
+                        positions.push(0, 0, 0);
+                        velocities.push(
+                            (Math.random() - 0.5) * 10,
+                            Math.random() * 10 + 5,
+                            (Math.random() - 0.5) * 10
+                        );
+                        const color = new THREE.Color(`hsl(${Math.random() * 360}, 100%, 50%)`);
+                        colors.push(color.r, color.g, color.b);
+                    }
 
-        const createExplosion = () => {
-            for (let j = 0; j < explosionCount; j++) {
-                const explosionX = (Math.random() - 0.5) * explosionRadius * 2;
-                const explosionY = (Math.random() - 0.5) * explosionRadius * 2;
-                const explosionZ = (Math.random() - 0.5) * explosionRadius * 2;
+                    particlesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                    particlesGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
-                for (let i = 0; i < particleCountPerExplosion; i++) {
-                    positions.push(
-                        explosionX,
-                        explosionY,
-                        explosionZ
-                    );
+                    const particlesMaterial = new THREE.PointsMaterial({
+                        size: 0.3,
+                        vertexColors: true,
+                        transparent: true,
+                    });
 
-                    velocities.push(
-                        (Math.random() - 0.5) * 3,
-                        (Math.random() - 0.5) * 3,
-                        (Math.random() - 0.5) * 3
-                    );
+                    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+                    scene.add(particles);
 
-                    const color = new THREE.Color(`hsl(${Math.random() * 360}, 100%, 50%)`);
-                    colors.push(color.r, color.g, color.b);
+                    const animate = () => {
+                        currentAnimationFrameId = requestAnimationFrame(animate);
 
-                    sizes.push(Math.random() * 5 + 1); // 랜덤 크기
-                }
-            }
+                        const positions = particlesGeometry.attributes.position.array;
+                        const colors = particlesGeometry.attributes.color.array;
+
+                        for (let i = 0; i < positions.length; i += 3) {
+                            positions[i] += velocities[i];     // X축 이동
+                            positions[i + 1] += velocities[i + 1]; // Y축 이동
+                            positions[i + 2] += velocities[i + 2]; // Z축 이동
+
+                            velocities[i + 1] -= 0.1; // 중력 효과
+
+                            const distance = Math.sqrt(
+                                positions[i] ** 2 +
+                                positions[i + 1] ** 2 +
+                                positions[i + 2] ** 2
+                            );
+                            colors[i] *= 1 - distance * 0.01;
+                            colors[i + 1] *= 1 - distance * 0.01;
+                            colors[i + 2] *= 1 - distance * 0.01;
+                        }
+
+                        particlesGeometry.attributes.position.needsUpdate = true;
+                        particlesGeometry.attributes.color.needsUpdate = true;
+                        renderer.render(scene, camera);
+                    };
+
+                    animate();
+                },
+                stop: () => cancelAnimationFrame(currentAnimationFrameId),
+            },
         };
 
-        createExplosion();
-
-        particlesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-        particlesGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-        particlesGeometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
-
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 5,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.9, // 초기 투명도
-        });
-
-        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particles);
-
-        const animate = () => {
-            currentAnimationFrameId = requestAnimationFrame(animate);
-
-            const positions = particlesGeometry.attributes.position.array;
-            const colors = particlesGeometry.attributes.color.array;
-            const sizes = particlesGeometry.attributes.size.array;
-
-            for (let i = 0; i < positions.length; i += 3) {
-                // 위치 업데이트
-                positions[i] += velocities[i];
-                positions[i + 1] += velocities[i + 1];
-                positions[i + 2] += velocities[i + 2];
-
-                // 속도에 중력 효과 추가
-                velocities[i + 1] -= 0.02; // Y축으로 중력 작용
-
-                // 색상 페이드아웃
-                const fadeFactor = 0.01;
-                colors[i] *= 1 - fadeFactor;
-                colors[i + 1] *= 1 - fadeFactor;
-                colors[i + 2] *= 1 - fadeFactor;
-
-                // 파티클 크기 감소
-                sizes[i / 3] *= 0.98;
-
-                // 파티클이 사라졌다면 재초기화
-                if (sizes[i / 3] < 0.1) {
-                    positions[i] = (Math.random() - 0.5) * explosionRadius * 2;
-                    positions[i + 1] = (Math.random() - 0.5) * explosionRadius * 2;
-                    positions[i + 2] = (Math.random() - 0.5) * explosionRadius * 2;
-
-                    velocities[i] = (Math.random() - 0.5) * 3;
-                    velocities[i + 1] = (Math.random() - 0.5) * 3;
-                    velocities[i + 2] = (Math.random() - 0.5) * 3;
-
-                    const color = new THREE.Color(`hsl(${Math.random() * 360}, 100%, 50%)`);
-                    colors[i] = color.r;
-                    colors[i + 1] = color.g;
-                    colors[i + 2] = color.b;
-
-                    sizes[i / 3] = Math.random() * 5 + 1;
-                }
-            }
-
-            // 파티클 속성 업데이트
-            particlesGeometry.attributes.position.needsUpdate = true;
-            particlesGeometry.attributes.color.needsUpdate = true;
-            particlesGeometry.attributes.size.needsUpdate = true;
-
-            renderer.render(scene, camera);
-        };
-
-        animate();
-    },
-    stop: () => cancelAnimationFrame(currentAnimationFrameId),
-},
-    };
-       
         // 애니메이션 로드 함수
         function loadAnimation(type) {
             if (currentAnimation && animations[currentAnimation]) {
@@ -366,12 +318,10 @@
                 console.log('Rank:', rank);
 
                 if (rank < 10) {
-                    loadAnimation('firecracker');
-                } else if (rank < 40) {
                     loadAnimation('fire');
-                } else if (rank < 60) {
+                } else if (rank < 40) {
                     loadAnimation('sun');
-                } else if (rank < 80) {
+                } else if (rank < 60) {
                     loadAnimation('rain');
                 } else {
                     loadAnimation('snow');

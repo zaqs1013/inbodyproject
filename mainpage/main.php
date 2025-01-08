@@ -70,7 +70,7 @@
         mysqli_close($dbcon);
     }
     ?>
-
+<div class="container">
     <div class="wrapper">
         <header>FITO</header>
 
@@ -227,14 +227,15 @@
                     <img src="003.png" alt="Ad 3">
                     </div>
                 </div>
+                <button class="ad-slider-btn prev">◀</button>
+                <button class="ad-slider-btn next">▶</button>
             </div>
-            <button class="ad-slider-btn prev">◀</button>
-            <button class="ad-slider-btn next">▶</button>
+     
         </div>
 
         <footer>
             <div class="home">
-                <a href="./main.php">
+                <a href="../mainpage/main.php">
                     <img src="../mainpage/image/home_icon.png" alt="홈 아이콘" width="28" height="28">
                     홈
                 </a>
@@ -245,14 +246,15 @@
             </a>
             <a href="../todo/todo.php">
             <img src="../mainpage/image/column.png" alt="일정관리 아이콘" width="30" height="30">
-                일정관리
+                일정
             </a>
             <a href="../mypage/mypage.php">
                 <img src="../mainpage/image/body_icon.png" alt="마이페이지 아이콘" width="30" height="30">
-                마이페이지
+                내정보
             </a>
             </footer>
     </div>
+</div>
 </body>
 
 </html>

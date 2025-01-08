@@ -141,11 +141,8 @@ header {
 }
 
 footer {
-    font-family: "Do Hyeon", serif;
-    text-align: left;
-    display: flex;
-    justify-content: center;
-    gap: 35px;
+  display: flex;
+    justify-content: space-around;
     align-items: center;
     background-color: #fff;
     border-top: 1px solid #ddd;
@@ -154,6 +151,7 @@ footer {
     bottom: 0;
     width: 100%;
     max-width: 480px;
+
 }
 
 footer a {
@@ -166,3 +164,4 @@ footer a {
     align-items: center;
     gap: 5px;
 }
+ 

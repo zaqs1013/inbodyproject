@@ -107,11 +107,11 @@ mysqli_close($dbcon);
             </a>
             <a href="../todo/todo.php">
                 <img src="../mainpage/image/column.png" alt="일정관리 아이콘" width="30" height="30">
-                일정관리
+                일정
             </a>
             <a href="../mypage/mypage.php">
                 <img src="../mainpage/image/body_icon.png" alt="마이페이지 아이콘" width="30" height="30">
-                마이페이지
+                내정보
             </a>
         </footer>
     </div>

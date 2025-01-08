@@ -49,15 +49,21 @@
 
     <div class="container">
         <div class="wrapper">
-            <header>fi-to</header>
+            <header>FITO</header>
 
             <!-- 달력 영역 -->
             <div class="calendar-container">
                 <div class="calendar">
                     <div class="month">
-                        <button class="prev">&lt;</button>
+                        <!-- <button class="prev">&lt;</button> -->
+                        <svg class="prev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  d="M15.75 19.5 8.25 12l7.5-7.5" />
+                        </svg>
                         <div class="date"></div>
-                        <button class="next">&gt;</button>
+                        <!-- <button class="next">&gt;</button> -->
+                        <svg class="next" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
                     </div>
 
                     <div class="weekdays">
@@ -115,6 +121,8 @@
                 <?php else: ?>
                     <p>선택된 날짜에 섭취한 음식이 없습니다.</p>
                 <?php endif; ?>
+                <br>
+                <button class="edit-event-btn" onClick="location.href='../food/foodSearch.php'">음식 등록</button>
             </div>
 
             <!-- 일정(event) 영역 -->
@@ -124,6 +132,7 @@
                     <!-- JS에서 일정이 동적으로 들어감 -->
                 </div>
                 <button class="edit-event-btn">일정 추가</button>
+                
                 <div class="edit-event-wrapper">
                     <input type="text" class="edit-event-title" placeholder="일정 내용" />
                     <input type="time" class="edit-event-time-from" />
@@ -151,11 +160,11 @@
             </a>
             <a href="./todo.php">
             <img src="../mainpage/image/column.png" alt="일정관리 아이콘" width="30" height="30">
-                일정관리
+                일정
             </a>
             <a href="../mypage/mypage.php">
                 <img src="../mainpage/image/body_icon.png" alt="마이페이지 아이콘" width="30" height="30">
-                마이페이지
+                내정보
             </a>
             </footer>
         </div>

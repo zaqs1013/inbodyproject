@@ -91,7 +91,8 @@
     </table>
 
     <?php
-    $dbcon = mysqli_connect('localhost', 'root', '', 'FiTo');
+    include '../static/dbconfig.php';
+    $dbcon = mysqli_connect($host, $user, $password, $database);
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['saveToDb'])) {
         $ID = $_SESSION['ID']; // 사용자 ID
         $date = date('Y-m-d');

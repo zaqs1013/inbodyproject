@@ -147,3 +147,8 @@ footer a {
 footer a svg {
     margin-bottom: 4px;
 }
+
+.container{
+    /* display:flex; */
+    height:100vh;
+}

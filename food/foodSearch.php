@@ -20,8 +20,9 @@
     </form>
 
     <?php
-    $dbcon = mysqli_connect('localhost', 'root', '');
-    mysqli_select_db($dbcon, 'FiTo');
+    include '../static/dbconfig.php';
+    $dbcon = mysqli_connect($host, $user, $password, $database);
+  
 
     if (!$dbcon) {
         die("Connection failed: " . mysqli_connect_error());
