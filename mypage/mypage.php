@@ -89,6 +89,9 @@ mysqli_close($dbcon);
                             <a href="#"><text>FTO 시스템 회원탈퇴</text></a>
                             <button id="inbodyupload"><a href="modification.php">회원정보 수정</a></button><br><br>
                         </div>
+                        <div class="inbody">
+                            <button id="inbodyupload"><a href='../record/recordBody.php'>인바디 업데이트</button><br><br>
+                        </div>
                     </div>
                 </section>
             </div>
