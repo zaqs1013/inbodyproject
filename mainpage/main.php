@@ -237,23 +237,23 @@
         <footer>
             <div class="home">
                 <a href="./main.php">
-                    <img src="image/home_icon.png" alt="홈 아이콘" width="28" height="28">
-                    HOME
+                    <img src="../mainpage/image/home_icon.png" alt="홈 아이콘" width="28" height="28">
+                    홈
                 </a>
             </div>
             <a href="../rank/ranking.php">
-            <img src="image/body_icon.png" alt="홈 아이콘" width="30" height="30">
-                INBODY
+            <img src="../mainpage/image/notice.png" alt="랭킹 아이콘" width="30" height="30">
+                랭킹
             </a>
             <a href="../todo/todo.php">
-            <img src="image/column.png" alt="홈 아이콘" width="30" height="30">
-                TODOLIST
+            <img src="../mainpage/image/column.png" alt="일정관리 아이콘" width="30" height="30">
+                일정관리
             </a>
-            <a href="#">
-                <img src="image/notice.png" alt="홈 아이콘" width="30" height="30">
-                MYPAGE
+            <a href="../mypage/mypage.php">
+                <img src="../mainpage/image/body_icon.png" alt="마이페이지 아이콘" width="30" height="30">
+                마이페이지
             </a>
-        </footer>
+            </footer>
     </div>
 </body>
 
